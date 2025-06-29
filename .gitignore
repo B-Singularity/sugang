@@ -1,0 +1,63 @@
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+
+# =================================
+# Sensitive Information & Logs
+# =================================
+# 로컬 환경 전용 설정 파일 (DB 비밀번호 등 민감 정보 포함)
+application-local.properties
+application-local.yml
+
+# 환경 변수 파일
+.env
+*.env.*.local
+
+# 로그 파일
+*.log
+
+# Java 크래시 덤프
+hs_err_pid*.log
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
