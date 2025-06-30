@@ -1,88 +1,88 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.5.3'
-	id 'io.spring.dependency-management' version '1.1.7' // 최신 안정 버전으로 업데이트
-	id 'com.diffplug.spotless' version '6.25.0'        // Spotless 플러그인 추가
+    id 'java'
+    id 'org.springframework.boot' version '3.5.3'
+    id 'io.spring.dependency-management' version '1.1.7' // 최신 안정 버전으로 업데이트
+    id 'com.diffplug.spotless' version '6.25.0'        // Spotless 플러그인 추가
 }
 
 group = 'com.sugang'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
-	}
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
 }
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 // 버전 관리를 위한 ext 블록 확장
 ext {
-	set('springCloudVersion', "2025.0.0") // Spring Cloud 버전
-	set('lombokVersion', "1.18.32")       // Lombok 버전 변수화
+    set('springCloudVersion', "2025.0.0") // Spring Cloud 버전
+    set('lombokVersion', "1.18.32")       // Lombok 버전 변수화
 }
 
 spotless {
-	// Java 소스 코드에 대한 포매팅 규칙
-	java {
-		googleJavaFormat()  // Google Java Style Guide 적용
-		removeUnusedImports() // 사용하지 않는 import 제거
-		lineEndings 'UNIX'    // 라인 엔딩 통일
-	}
+    // Java 소스 코드에 대한 포매팅 규칙
+    java {
+        googleJavaFormat()  // Google Java Style Guide 적용
+        removeUnusedImports() // 사용하지 않는 import 제거
+        lineEndings 'UNIX'    // 라인 엔딩 통일
+    }
 }
 
 dependencies {
-	// --- Spring Boot Core & Web ---
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
+    // --- Spring Boot Core & Web ---
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-	// --- Persistence (JPA & PostgreSQL) ---
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	runtimeOnly 'org.postgresql:postgresql'
+    // --- Persistence (JPA & PostgreSQL) ---
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'org.postgresql:postgresql'
 
-	// --- Messaging (Kafka) ---
-	implementation 'org.springframework.kafka:spring-kafka'
+    // --- Messaging (Kafka) ---
+    implementation 'org.springframework.kafka:spring-kafka'
 
-	// --- MSA & Resilience (Circuit Breaker) ---
-	implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
+    // --- MSA & Resilience (Circuit Breaker) ---
+    implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
 
-	// --- Observability (Monitoring) ---
-	runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+    // --- Observability (Monitoring) ---
+    runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
 
-	// --- Developer Tools (Lombok) ---
-	compileOnly "org.projectlombok:lombok:${lombokVersion}"
-	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    // --- Developer Tools (Lombok) ---
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
-	// --- Testing ---
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
-	testImplementation 'org.springframework.kafka:spring-kafka-test'
-	testImplementation 'org.testcontainers:junit-jupiter'
-	testImplementation 'org.testcontainers:kafka'
-	testImplementation 'org.testcontainers:postgresql'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    // --- Testing ---
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+    testImplementation 'org.springframework.kafka:spring-kafka-test'
+    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation 'org.testcontainers:kafka'
+    testImplementation 'org.testcontainers:postgresql'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 dependencyManagement {
-	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-	}
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 // Gradle Wrapper 버전 설정
 tasks.named('wrapper', Wrapper) {
-	gradleVersion = '8.8' // Java 21과 호환되는 안정적인 버전
+    gradleVersion = '8.8' // Java 21과 호환되는 안정적인 버전
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
