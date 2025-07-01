@@ -1,1 +1,5 @@
-rootProject.name = 'registration-service'
+rootProject.name = 'sugang-system'
+include 'services:student-service'
+include 'services:course-service'
+include 'services:registration-service'
+include 'services:confirmed-course-service'
