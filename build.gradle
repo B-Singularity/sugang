@@ -1,0 +1,67 @@
+// 루트 build.gradle
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.5.3' apply false
+    id 'io.spring.dependency-management' version '1.1.7' apply false
+    id 'com.diffplug.spotless' version '6.25.0' apply false
+}
+
+// 모든 하위 프로젝트(서비스 모듈들)에 공통으로 적용될 설정
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management' // <-- 이 플러그인이 적용된 곳
+    apply plugin: 'com.diffplug.spotless'
+
+    group = 'com.sugang'
+    version = '0.0.1-SNAPSHOT'
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+    }
+
+
+    // [수정] dependencyManagement 블록을 subprojects 안으로 이동
+    dependencyManagement {
+        imports {
+            // Spring Cloud 버전을 정의합니다.
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:2023.0.3"
+        }
+        // 여기에 Testcontainers, JWT 등 공통 라이브러리의 버전을 명시할 수 있습니다.
+        dependencies {
+            dependencySet('org.testcontainers:1.19.8') {
+                entry 'testcontainers'
+                entry 'junit-jupiter'
+                entry 'kafka'
+                entry 'postgresql'
+            }
+            dependency 'io.jsonwebtoken:jjwt-api:0.12.5'
+        }
+    }
+
+    spotless {
+        java {
+            googleJavaFormat()
+            removeUnusedImports()
+            lineEndings 'UNIX'
+        }
+    }
+
+    // 모든 모듈이 공통으로 사용하는 의존성
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'org.testcontainers:junit-jupiter'
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
+
+// 루트 프로젝트 자체에는 아무런 설정이나 의존성이 필요 없습니다.

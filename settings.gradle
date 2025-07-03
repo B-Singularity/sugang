@@ -1,0 +1,33 @@
+// settings.gradle
+
+// 플러그인을 어디서 찾을지 정의하는 블록
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+    plugins {
+        // 여기에 각 플러그인의 ID와 버전만 명시합니다.
+        id 'org.springframework.boot' version '3.3.1'
+        id 'io.spring.dependency-management' version '1.1.8'
+        id 'com.diffplug.spotless' version '6.25.0'
+    }
+}
+
+// 라이브러리 의존성을 어디서 찾을지 정의하는 블록
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        mavenCentral()
+    }
+}
+
+// 프로젝트 루트 이름 설정
+rootProject.name = 'sugang-system'
+
+// 하위 서비스 모듈 목록
+// 예시: include 'services:student-service'
+include 'services:student-service'
+include 'services:registration-service'
+include 'services:course-service'
+include 'services:confirmed-course-service'
