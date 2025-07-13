@@ -85,5 +85,14 @@ class ClassScheduleTest {
         assertThat(isConflict).isTrue();
     }
 
+    @Test
+    @DisplayName("계약: 값이 다르면 다른 객체로 취급한다.")
+    void it_considers_two_objects_not_equal_if_any_field_is_different() {
+        var scheduleA = new ClassSchedule(DayOfWeek.MONDAY, LocalTime.of(9, 0), LocalTime.of(12, 0));
+        var scheduleB = new ClassSchedule(DayOfWeek.MONDAY, LocalTime.of(10, 0), LocalTime.of(11, 0));
+
+        assertThat(scheduleA).isNotEqualTo(scheduleB);
+    }
+
 
 }
