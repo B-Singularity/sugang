@@ -6,23 +6,23 @@ import java.util.Set;
 
 public interface ManageCourseUseCase {
 
-    OpenedCourse createOpenedCourse(CreateCourseCommand command);
+  OpenedCourse createOpenedCourse(CreateOpenedCourseCommand command);
 
-    OpenedCourse updateOpenedCourse(OpenedCourseId id, UpdateOpenedCourseCommand command);
+  OpenedCourse updateOpenedCourse(OpenedCourseId id, UpdateOpenedCourseCommand command);
 
-    void deleteOpenedCourse(OpenedCourseId id);
+  void deleteOpenedCourse(OpenedCourseId id);
 
-    record CreateCourseCommand(
-            CourseCode courseCode,
-            Semester semester,
-            Set<Instructor> instructors,
-            ClassSchedule classSchedule,
-            Quota quota,
-            Syllabus syllabus
-    ) {}
+  record CreateOpenedCourseCommand(
+      CourseCode courseCode,
+      Semester semester,
+      Set<Instructor> instructors,
+      ClassSchedule classSchedule,
+      Quota quota,
+      Syllabus syllabus) {}
 
-    record UpdateOpenedCourseCommand(
-            String instructor,
-            int capacity
-    ) {}
+  record UpdateOpenedCourseCommand(
+      Set<Instructor> instructors,
+      ClassSchedule classSchedule,
+      int capacity, // Quota의 일부
+      Syllabus syllabus) {}
 }
