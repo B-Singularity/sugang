@@ -3,6 +3,7 @@ package com.sugang.course.domain.vo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("CourseCode Vo 단위 테스트")
@@ -30,6 +31,16 @@ class CourseCodeTest {
     @Test
     void throw_exception_when_value_is_invalid() {
         assertThrows(IllegalArgumentException.class, () -> new CourseCode("CS101033"));
+    }
+
+    @DisplayName("계약: 같은 값을 가질 경우 같은 객체여야 한다.")
+    @Test
+    void it_considers_two_objects_equal_if_all_fields_are_the_same() {
+        var codeA = new CourseCode("CS101");
+        var codeB = new CourseCode("CS101");
+        assertThat(codeA)
+                .isEqualTo(codeB)
+                .hasSameHashCodeAs(codeB);
     }
 
 }
