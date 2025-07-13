@@ -28,6 +28,7 @@ public class StudentService implements RegisterStudentUseCase, AuthenticateStude
 
     // 학생 등록 구현
     @Override
+    // 인터페이스 구현하겠다.
     public Student register(RegisterStudentCommand command) {
         // 1. VO 변환
         StudentId id = new StudentId(command.studentId());
