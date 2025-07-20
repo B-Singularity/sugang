@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sugang.course.adapter.out.persistence.entity.OpenedCourseJpaEntity;
-import com.sugang.course.application.port.in.ManageCourseUseCase;
+import com.sugang.course.application.port.in.ManageOpenedCourseUseCase;
 import com.sugang.course.domain.aggregate.OpenedCourse;
 import com.sugang.course.domain.vo.Instructor;
 import com.sugang.course.domain.vo.OpenedCourseId;
@@ -32,7 +32,7 @@ public interface OpenedCourseMapper {
   @Mapping(target = "classSchedule", source = "command.classSchedule")
   @Mapping(target = "quota", source = "command.quota")
   @Mapping(target = "syllabus", source = "command.syllabus")
-  OpenedCourse toDomain(ManageCourseUseCase.CreateOpenedCourseCommand command, OpenedCourseId id);
+  OpenedCourse toDomain(ManageOpenedCourseUseCase.CreateOpenedCourseCommand command, OpenedCourseId id);
 
   // --- 커스텀 매핑 메서드 (Set<Instructor> <-> String) ---
   @Named("instructorsToString")

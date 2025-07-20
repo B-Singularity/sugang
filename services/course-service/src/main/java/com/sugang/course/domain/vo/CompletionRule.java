@@ -26,6 +26,7 @@ public class CompletionRule {
 
     this.departmentId = departmentId;
     this.courseType = courseType;
+
   }
 
 

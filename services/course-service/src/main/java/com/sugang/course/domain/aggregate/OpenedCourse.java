@@ -1,6 +1,6 @@
 package com.sugang.course.domain.aggregate;
 
-import com.sugang.course.application.port.in.ManageCourseUseCase;
+import com.sugang.course.application.port.in.ManageOpenedCourseUseCase;
 import com.sugang.course.domain.vo.*;
 import java.util.Collections;
 import java.util.HashSet;
@@ -10,13 +10,11 @@ import lombok.*;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Builder
 public class OpenedCourse {
 
   private OpenedCourseId openedCourseId;
   private CourseCode courseCode;
   private Semester semester;
-  @Builder.Default
   private Set<Instructor> instructors = new HashSet<>();
   private ClassSchedule classSchedule;
   private Quota quota;
@@ -69,7 +67,7 @@ public class OpenedCourse {
     return Collections.unmodifiableSet(this.instructors);
   }
 
-  public void updateDetails(ManageCourseUseCase.UpdateOpenedCourseCommand command) {
+  public void updateDetails(ManageOpenedCourseUseCase.UpdateOpenedCourseCommand command) {
     if (command.capacity() < this.quota.getRegisteredCount()) {
       throw new IllegalArgumentException("총 정원을 현재 신청 인원보다 적게 설정할 수 없습니다.");
     }

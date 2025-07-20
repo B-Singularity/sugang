@@ -1,28 +1,30 @@
 package com.sugang.course.application.port.in;
 
-import com.sugang.course.domain.aggregate.OpenedCourse;
-import com.sugang.course.domain.vo.*;
+import com.sugang.course.domain.aggregate.Course;
+import com.sugang.course.domain.vo.CompletionRule;
+import com.sugang.course.domain.vo.CourseCode;
+
 import java.util.Set;
 
 public interface ManageCourseUseCase {
 
-  OpenedCourse createOpenedCourse(CreateOpenedCourseCommand command);
+    Course createCourse(CreateCourseCommand command);
 
-  OpenedCourse updateOpenedCourse(OpenedCourseId id, UpdateOpenedCourseCommand command);
+    Course updateCourse(UpdateCourseCommand commnad);
 
-  void deleteOpenedCourse(OpenedCourseId id);
+    void deleteCourse(CourseCode courseCode);
 
-  record CreateOpenedCourseCommand(
-      CourseCode courseCode,
-      Semester semester,
-      Set<Instructor> instructors,
-      ClassSchedule classSchedule,
-      Quota quota,
-      Syllabus syllabus) {}
+    record CreateCourseCommand(
+            CourseCode courseCode,
+            String title,
+            String description,
+            Set<CourseCode> prerequisites,
+            Set<CompletionRule> completionRules){}
 
-  record UpdateOpenedCourseCommand(
-      Set<Instructor> instructors,
-      ClassSchedule classSchedule,
-      int capacity, // Quota의 일부
-      Syllabus syllabus) {}
+    record UpdateCourseCommand(
+            CourseCode courseCode,
+            String title,
+            String description,
+            Set<CourseCode> prerequisites,
+            Set<CompletionRule> completionRules){}
 }

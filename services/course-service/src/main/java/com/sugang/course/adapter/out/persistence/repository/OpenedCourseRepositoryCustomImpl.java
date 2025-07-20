@@ -5,7 +5,7 @@ import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.StringPath;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.sugang.course.adapter.out.persistence.entity.OpenedCourseJpaEntity;
-import com.sugang.course.application.port.in.LoadCourseQuery.CourseSearchCommand;
+import com.sugang.course.application.port.in.LoadOpenedCourseQuery.OpendedCourseSearchCommand;
 import com.sugang.course.domain.vo.CourseType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.util.StringUtils;
@@ -21,7 +21,7 @@ public class OpenedCourseRepositoryCustomImpl implements OpenedCourseRepositoryC
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<OpenedCourseJpaEntity> search(CourseSearchCommand command) {
+    public List<OpenedCourseJpaEntity> search(OpendedCourseSearchCommand command) {
         return queryFactory
                 .selectFrom(openedCourseJpaEntity)
                 .join(courseJpaEntity).on(openedCourseJpaEntity.courseCode.eq(courseJpaEntity.courseCode))

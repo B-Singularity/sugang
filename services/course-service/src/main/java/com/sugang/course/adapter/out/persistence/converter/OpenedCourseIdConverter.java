@@ -9,7 +9,7 @@ public class OpenedCourseIdConverter implements AttributeConverter<OpenedCourseI
 
   @Override
   public String convertToDatabaseColumn(OpenedCourseId attribute) {
-    return attribute == null ? null : attribute.courseId();
+    return attribute == null ? null : attribute.openedCourseId();
   }
 
   @Override

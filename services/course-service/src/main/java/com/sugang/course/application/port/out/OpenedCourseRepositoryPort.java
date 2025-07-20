@@ -1,6 +1,6 @@
 package com.sugang.course.application.port.out;
 
-import com.sugang.course.application.port.in.LoadCourseQuery;
+import com.sugang.course.application.port.in.LoadOpenedCourseQuery;
 import com.sugang.course.domain.aggregate.OpenedCourse;
 import com.sugang.course.domain.vo.OpenedCourseId;
 import java.util.List;
@@ -13,5 +13,5 @@ public interface OpenedCourseRepositoryPort {
 
   void deleteById(OpenedCourseId openedCourseId);
 
-  List<OpenedCourse> search(LoadCourseQuery.CourseSearchCommand command);
+  List<OpenedCourse> searchOpenedCourse(LoadOpenedCourseQuery.OpendedCourseSearchCommand command);
 }
